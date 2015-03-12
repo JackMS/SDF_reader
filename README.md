@@ -11,3 +11,9 @@ but really this project is just an interim to figuring out the sdf reader librar
 writing a wury generator around that. Unil then, this is a good starting point. 
 
 ~Jack M. Sexton - 2015
+
+Update: Now calculates the number of objects in the file correctly and works for
+all data-sets conforming to the particle declared. Please inspect the dataset being opened
+first and confirm it is is correct. If changes need to made you'll need the header length 
+and structure declaration of the new file as well as changes to the for loops as applicable. 
+~JMS 3/12/2015
