@@ -22,6 +22,11 @@
 	
 	~Jack M. Sexton - 2014
 	
+	Now figures out the # of objects reasonably well and works for all
+	data-sets conforming to the structure declared currently 
+	(jet3b, jet5c, etc). 
+	~JMS 2015
+	
 	Useage
 	./sdf_reader [SDF Files] 
 */
@@ -58,7 +63,7 @@ typedef struct
 int main(int argc, char *argv[])
 {
 
-	int h,i,nobj = 945628;
+	int h,i,sz,nobj;
 	char *filename;
 	char out_file[50];
 	int offset=1600;
@@ -79,8 +84,11 @@ int main(int argc, char *argv[])
 		FILE *fp = fopen(filename, "rb");
 		FILE *ofp = fopen(out_file,"w");
 
-		fseek(fp,offset,SEEK_SET);
+		fseek(fp, 0L, SEEK_END);
+		sz = ftell(fp);
+		nobj = (sz-offset)/sizeof(particle);
 		
+		fseek(fp,offset,SEEK_SET);
 		fread(&part,sizeof(particle),1,fp);
 		fprintf(ofp, "ident, x, y, z, density, temp, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d, %d:%d \n ",
 							part.p1, part.m1, part.p2, part.m2, part.p3, part.m3, part.p4, part.m4, part.p5, part.m5, part.p6, part.m6, part.p7, part.m7, part.p8, part.m8, part.p9, part.m9, part.p10, part.m10, part.p11, part.m11, part.p12, 
