@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 	{
 		filename=argv[h];
 		strcpy(out_file, argv[h]);
-		strcat(out_file, ".jsf");
+		strcat(out_file, ".out");
 		
 		FILE *fp = fopen(filename, "rb");
 		FILE *ofp = fopen(out_file,"w");
